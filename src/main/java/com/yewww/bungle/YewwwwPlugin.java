@@ -14,7 +14,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 
 @Slf4j
 @PluginDescriptor(
-	name = "YEWWWW"
+	name = "Yewww"
 )
 public class YewwwwPlugin extends Plugin
 {
@@ -27,13 +27,13 @@ public class YewwwwPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("YEWWWW started!");
+		log.info("Yewww started!");
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("YEWWWW stopped!");
+		log.info("Yewww stopped!");
 	}
 
 	@Subscribe
@@ -41,7 +41,7 @@ public class YewwwwPlugin extends Plugin
 	{
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
 		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "YEWWWW says " + config.greeting(), null);
+			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Yewww says " + config.greeting(), null);
 		}
 	}
 
