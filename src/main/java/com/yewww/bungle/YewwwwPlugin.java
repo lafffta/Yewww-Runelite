@@ -15,6 +15,7 @@ import javax.sound.sampled.*;
 import java.io.*;
 
 import static net.runelite.api.ObjectID.*;
+import static net.runelite.api.NullObjectID.NULL_10823;
 
 @Slf4j
 @PluginDescriptor(
@@ -29,6 +30,8 @@ public class YewwwwPlugin extends Plugin
 	private YewwwwConfig config;
 
 	private Clip clip = null;
+	private Clip rareClip = null;
+
 	@Override
 	protected void startUp() {
 		log.info("Yewww started!");
@@ -43,20 +46,22 @@ public class YewwwwPlugin extends Plugin
 		{
 			log.warn("Unable to load builtin Yewww sound", e);
 		}
+
+		try (InputStream fileStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources", "YOUUUU.wav")));
+			 AudioInputStream sound = AudioSystem.getAudioInputStream(fileStream))
+		{
+			rareClip = AudioSystem.getClip();
+			rareClip.open(sound);
+		}
+		catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
+		{
+			log.warn("Unable to load builtin Yewww sound", e);
+		}
 	}
 
 	@Override
 	protected void shutDown() {
 		log.info("Yewww stopped!");
-	}
-
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Yewww says " + config.greeting(), null);
-		}
 	}
 
 //	static final int[] yew_ids = {YEW, NULL_10823, YEW_36683, YEW_40756};
@@ -70,8 +75,14 @@ public class YewwwwPlugin extends Plugin
 		for (int yew_id : yew_ids) {
 			if (id == yew_id) {
 //				client.playSoundEffect(SoundEffectID.GE_DECREMENT_PLOP, SoundEffectVolume.HIGH); // play sound
-				clip.setFramePosition(0);
-				clip.start();
+				double rand = Math.random();
+				if(rand < 0.01) {
+					rareClip.setFramePosition(0);
+					rareClip.start();
+				} else {
+					clip.setFramePosition(0);
+					clip.start();
+				}
 			}
 		}
 	}
