@@ -8,12 +8,13 @@ import net.runelite.client.config.ConfigItem;
 public interface YewwwwConfig extends Config
 {
 	@ConfigItem(
-		keyName = "greeting",
-		name = "Welcome Greeting",
-		description = "The message to show to the user when they login"
+		keyName = "rareSound",
+		name = "Play Rare Sound",
+		description = "Rare sound (1/100) - slightly longer, with music",
+		position = 1
 	)
-	default String greeting()
+	default boolean rareSound()
 	{
-		return "Hello";
+		return true;
 	}
 }

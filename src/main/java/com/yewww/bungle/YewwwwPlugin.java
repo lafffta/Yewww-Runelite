@@ -73,10 +73,10 @@ public class YewwwwPlugin extends Plugin
 		final GameObject object = event.getGameObject();
 		int id = object.getId();
 		for (int yew_id : yew_ids) {
-			if (id == yew_id) {
+			if ((id == yew_id) && (object.getWorldLocation().distanceTo2D(client.getLocalPlayer().getWorldLocation()) <= 5)) {
 //				client.playSoundEffect(SoundEffectID.GE_DECREMENT_PLOP, SoundEffectVolume.HIGH); // play sound
 				double rand = Math.random();
-				if(rand < 0.01) {
+				if((rand < 0.01) && config.rareSound()) {
 					rareClip.setFramePosition(0);
 					rareClip.start();
 				} else {
