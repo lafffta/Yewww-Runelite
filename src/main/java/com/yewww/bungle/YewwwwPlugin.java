@@ -12,9 +12,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 
 import javax.inject.Inject;
 import javax.sound.sampled.*;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 import static net.runelite.api.ObjectID.*;
 
@@ -30,13 +28,15 @@ public class YewwwwPlugin extends Plugin
 	@Inject
 	private YewwwwConfig config;
 
-	private Clip clip;
+	private Clip clip = null;
 	@Override
 	protected void startUp() {
 		log.info("Yewww started!");
-		try (InputStream fileStream = new BufferedInputStream(YewwwwPlugin.class.getResourceAsStream("YOUUU.mp3"));
+//		try (InputStream fileStream = new BufferedInputStream(YewwwwPlugin.class.getResourceAsStream("YOUUU.wav"));
+		try (InputStream fileStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources", "YOUUU.wav")));
 			 AudioInputStream sound = AudioSystem.getAudioInputStream(fileStream))
 		{
+			clip = AudioSystem.getClip();
 			clip.open(sound);
 		}
 		catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
@@ -70,6 +70,7 @@ public class YewwwwPlugin extends Plugin
 		for (int yew_id : yew_ids) {
 			if (id == yew_id) {
 //				client.playSoundEffect(SoundEffectID.GE_DECREMENT_PLOP, SoundEffectVolume.HIGH); // play sound
+				clip.setFramePosition(0);
 				clip.start();
 			}
 		}
