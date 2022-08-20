@@ -34,8 +34,8 @@ public class YewwwwPlugin extends Plugin
 	@Override
 	protected void startUp() {
 		log.info("Yewww started!");
-//		try (InputStream fileStream = new BufferedInputStream(YewwwwPlugin.class.getResourceAsStream("YOUUU.wav"));
-		try (InputStream fileStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources", "YOUUU.wav")));
+		try (InputStream fileStream = new BufferedInputStream(YewwwwPlugin.class.getResourceAsStream("YOUUU.wav"));
+//		try (InputStream fileStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources", "YOUUU.wav")));
 			 AudioInputStream sound = AudioSystem.getAudioInputStream(fileStream))
 		{
 			clip = AudioSystem.getClip();
@@ -45,8 +45,8 @@ public class YewwwwPlugin extends Plugin
 		{
 			log.warn("Unable to load builtin Yewww sound 1", e);
 		}
-//		try (InputStream fileStream = new BufferedInputStream(YewwwwPlugin.class.getResourceAsStream("YOUUUU.wav"));
-		try (InputStream fileStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources", "YOUUUU.wav")));
+		try (InputStream fileStream = new BufferedInputStream(YewwwwPlugin.class.getResourceAsStream("YOUUUU.wav"));
+//		try (InputStream fileStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources", "YOUUUU.wav")));
 			 AudioInputStream sound = AudioSystem.getAudioInputStream(fileStream))
 		{
 			rareClip = AudioSystem.getClip();
@@ -63,8 +63,8 @@ public class YewwwwPlugin extends Plugin
 		log.info("Yewww stopped!");
 	}
 
-//	static final int[] yew_ids = {YEW, NULL_10823, YEW_36683, YEW_40756}; // yew ids
-	static final int[] yew_ids = {TREE, TREE_1277, TREE_1278, TREE_1279, TREE_1280, TREE_40750, TREE_40752}; // normal tree ids (DEBUG)
+	static final int[] yew_ids = {YEW, NULL_10823, YEW_36683, YEW_40756}; // yew ids
+//	static final int[] yew_ids = {TREE, TREE_1277, TREE_1278, TREE_1279, TREE_1280, TREE_40750, TREE_40752}; // normal tree ids (DEBUG)
 
 	@Subscribe
 	public void onGameObjectDespawned(final GameObjectDespawned event)
